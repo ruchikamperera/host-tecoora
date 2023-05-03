@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunksyndron"] = self["webpackChunksyndron"] || []).push([["src_app_error_error_module_ts"],{
 
-/***/ 4046:  
+/***/ 4046:
 /*!************************************************************!*\
   !*** ./src/app/error/coming-soon/coming-soon.component.ts ***!
   \************************************************************/
