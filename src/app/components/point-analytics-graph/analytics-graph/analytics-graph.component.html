@@ -1,0 +1,19 @@
+<div class="container my-3" style="margin-top: 10%">
+	Date range:
+	<from [formGroup]="staffForm">
+		<ng-multiselect-dropdown
+		[settings]="dropdownSettings"
+		[data]="dropdownList"
+		formControlName="area" (onSelect)="onItemSelect($event)">
+		</ng-multiselect-dropdown>
+	</from>
+  </div>
+<div class="row row-cols-1 row-cols-md-1 row-cols-xl-1">
+	<div class="col">
+		<div class="card radius-10">
+			<div class="card-body">
+				<highcharts-chart style="display: block;" [Highcharts]="Highcharts1" [options]="chartOptions1"></highcharts-chart>
+			</div>
+		</div>
+	</div>
+</div>

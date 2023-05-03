@@ -1,0 +1,96 @@
+  <!-- Sidebar Content starts -->
+<div class="sidebar sidebar-wrapper" >
+        <!-- Sidebar Header starts -->
+        <div class="sidebar-header">
+            <div>
+                <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+            </div>
+            <div>
+                <h4 class="logo-text">Syndron</h4>
+            </div>
+            <div class="toggle-icon ms-auto"><i  (click)="toggleSidebar()"  class='bx bx-arrow-to-left'></i>
+            </div>
+        </div>
+        <!-- Sidebar Header Ends -->
+    <!-- <div class="sidebar-content" [perfectScrollbar]>
+        <ul class="navigation">
+            <li [className]="activeMenuClass('/dashboard')" id="home">
+                <a [routerLink]="['/dashboard']">
+                  <span class="m-1">
+                    Dashboard
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/settings')" id="settings">
+                <a [routerLink]="['/settings']">
+                  <span class="m-1">
+                    Account settings
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/job-list')" id="jonList">
+                <a [routerLink]="['/job-list']">
+                  <span class="m-1">
+                    Skilled job list
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/map')" id="map">
+                <a [routerLink]="['/map']">
+                  <span class="m-1">
+                    Regional map
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/analytics-graph')" id="analyticsGraph">
+                <a [routerLink]="['/analytics-graph']">
+                  <span class="m-1">
+                    Point analytics graph
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/status')" id="status">
+                <a [routerLink]="['/status']">
+                  <span class="m-1">
+                    Visa process status
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/faq')" id="faq">
+                <a [routerLink]="['/faq']">
+                  <span class="m-1">
+                    FAQs
+                  </span>
+                </a>
+            </li>
+            <li [className]="activeMenuClass('/application/invoice')" id="application">
+              <a [routerLink]="['/application/invoice']">
+                <span class="m-1">
+                  Application
+                </span>
+              </a>
+            </li>
+            <li [className]="activeMenuClass('/widgets')" id="widgets">
+              <a [routerLink]="['/widgets']">
+                <span class="m-1">
+                  Widgets
+                </span>
+              </a>
+            </li>
+        </ul>
+    </div> -->
+    <!-- Sidebar Content Ends -->
+    <div class="sidebar-content" [perfectScrollbar]>
+      <ul class="navigation">
+          <!-- First level menu -->
+          <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.class]" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
+              [routerLinkActiveOptions]="{exact: true}">
+              <a [routerLink]="menuItem.class === '' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink; else externalLinkBlock">
+                  <i [ngClass]="[menuItem.icon]"></i>
+                  <span class="menu-title">{{menuItem.title}}</span>
+                  <span *ngIf="menuItem.badge != '' " [ngClass]="[menuItem.badgeClass]">{{menuItem.badge}}</span>
+              </a>
+          </li>
+      </ul>
+  </div>
+</div>

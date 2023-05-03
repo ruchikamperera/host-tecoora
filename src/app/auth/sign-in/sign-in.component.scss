@@ -1,0 +1,18 @@
+.social-container{
+    border: 2px solid rgb(94, 103, 199);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Define the animation */
+@keyframes example {
+    from {color: red;}
+    to {color: rgb(83, 184, 100);}
+}
+
+/* Apply the animation to the text */
+.animate {
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}

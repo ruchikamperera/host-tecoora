@@ -1,0 +1,10 @@
+/* month picker */
+
+::ng-deep .theme-green .bs-datepicker-head {
+    background-color: #441be7;
+  }
+  
+::ng-deep .bs-datepicker-body table td span.selected {
+    color: #fff;
+    background-color: #441be7 !important;
+}

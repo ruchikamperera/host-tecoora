@@ -1,0 +1,118 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+/* You can add global styles to this file, and also import other style files */
+.group-background{
+
+    background: #a2b1c5;
+    border-radius: 5px;
+    
+    }
+    
+    .custom-slider-bg{
+        padding: 8px 16px;
+    }
+    
+    .custom-slider{
+        color:white;
+        background: linear-gradient(94.73deg, #5a5daa -3.67%, #5a5daa 40.04%, #4779a1 97.44%);// #5a5daa; 
+        border-radius: 5px;
+    }
+    
+    .toggle-label{
+        padding:8px 16px;
+        border-radius: 5px;
+        width: 5rem;
+    }
+    
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /** navbar  **/
+
+.navbar {
+
+	border-bottom: 1px solid rgb(228 228 228 / 0%);
+	border-color: #868789;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #ffffff;
+}
+
+.nav-item-name {
+    font-family: var(--font-roboto);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+    color: #ffffff;
+    background: #3f429c;
+    border-radius: 6px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #65b3ba;
+}
+
+.outline {
+    border-color:black;
+    border-radius: 6px;
+}
+
+.outline:hover {
+    background: #777895;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    background: #5a5daa;
+    border-radius: 6px;
+}
+
+/** error message **/
+.error {
+    color: rgb(219, 51, 51);
+    font-family: var(--font-roboto);
+    font-size: 1rem;
+}
+
+
+/** dashboards **/
+.home-button {
+    width:100%;
+    // height: 80px;
+    color: black;
+    background-color: rgb(234, 234, 234);
+}   
+
+.home-button:hover {
+    background-color: #0d6efd;
+}
+
+@media only screen and (max-width: 412px) {
+    .home-button
+    {
+        width: 235px;
+    }
+}
+
+.product-list {
+	position: relative;
+	height: 250px;
+}
+
+    
+//page footer
+.page-footer {
+    left: 0;
+}

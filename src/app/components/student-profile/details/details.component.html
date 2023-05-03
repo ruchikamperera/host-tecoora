@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-12 mx-auto">
+      <h6 class="mb-0 text-uppercase">Student details</h6>
+      <hr/>
+      <div class="card radius-10">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="inputName" class="form-label"><strong>Name :</strong></label>
+                  <span class="name">{{selectedStudent?.firstName}} {{selectedStudent?.lastName}}</span>
+                </div>
+                <div class="col-md-12">
+                  <label for="inputEmail" class="form-label"><strong>Email :</strong></label>
+                  <span class="email">{{selectedStudent?.email}}</span>
+                </div>
+                <div *ngIf="selectedStudent?.dob != null" class="col-md-12">
+                  <label for="inputBirthday" class="form-label"><strong>Birthday :</strong></label>
+                  <span class="dob">{{selectedStudent?.dob}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col text-end" *ngIf="selectedStudent?.profileImageUrl === null ; else second">
+              <img src="/assets/images/gallery/user_avatar.png" alt="" class="rounded-circle p-1 border" width="90" height="90">
+          </div>
+
+          <ng-template #second>
+            <div class="col text-end">
+              <img src="{{selectedStudent.profileImageUrl}}" alt="" class="rounded-circle p-1 border" width="90" height="90">
+            </div>
+          </ng-template>
+          </div>
+            <hr>
+            <div class="row">
+              <h4 *ngIf="sessions">Point Calculator Sessions</h4>
+              <span *ngIf="isEmptySessions">Empty</span>
+              <div *ngFor="let session of sessions">
+                <button class="btn btn-success my-2" (click)="loadPointForm(session)">session {{session.attempt}}</button>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  

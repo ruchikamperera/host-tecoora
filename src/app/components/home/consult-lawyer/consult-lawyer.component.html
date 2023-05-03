@@ -1,0 +1,104 @@
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+	<div class="breadcrumb-title pe-3">Dashboard</div>
+	<div class="ps-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 p-0">
+				<li class="breadcrumb-item">
+					<a href="#" (click)="$event.preventDefault()"><i class="bx bx-home-alt"></i></a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					Consult lawyer
+				</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+<!--end breadcrumb-->
+<div class="row mb-3">
+	<div class="col-3 justify-content-start">
+		<input type="text" class="form-control ps-5" [(ngModel)]="search" (keyup)="keyup()" placeholder="Search" />
+	</div>
+	<div class="col-6 text-center">
+		<div class="btn-group group-background .custom-slider-bg">
+			<div id="day">
+				<a class="btn btn-text toggle-label" (click)="onClick('lawyer')"
+					[class.custom-slider]="selected === 'lawyer'">
+					Lawyer
+				</a>
+			</div>
+			<div id="week">
+				<a class="btn btn-text toggle-label" (click)="onClick('agency')"
+					[class.custom-slider]="selected === 'agency'">
+					Agency
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-3 justify-content-end text-end">
+		<select #sort (change)="onSelected(sort.value)" class="form-select mb-3" aria-label="Default select example">
+			<option default selected>Sort by</option>
+			<option>No of reviews</option>
+			<option>Years of experience</option>
+		</select>
+	</div>
+</div>
+<div *ngIf="selected == 'lawyer'">
+	<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
+		<div *ngFor="let user of users" class="col">
+			<div class="card">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="assets/images/avatars/avatar-1.png" alt="..." class="card-img" />
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">{{user.FirstName}} {{user.LastName}}</h5>
+							<p class="card-text">
+								one trained and licensed to prepare, manage, and either
+								prosecute or defend a court action as an agent.
+							</p>
+							<p class="card-text">
+								<small class="text-muted">{{user.State}}</small>
+							</p>
+							<div class="col text-end">
+								<button type="button" class="btn btn-outline-secondary px-5"
+									(click)="redirectProfile(user.Id)">
+									View profile
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div *ngIf="selected == 'agency'">
+	<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
+		<div *ngFor="let user of users" class="col">
+			<div class="card">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="assets/images/gallery/01.jpg" height="211px" alt="..." class="card-img" />
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">{{user.FirstName}}</h5>
+							<p class="card-text">description</p>
+							<p class="card-text">
+								<small class="text-muted">{{user.State}}</small>
+							</p>
+							<div class="col text-end">
+								<button type="button" class="btn btn-outline-secondary px-5"
+									(click)="redirectProfile(user.Id)">
+									View profile
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

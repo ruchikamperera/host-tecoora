@@ -1,0 +1,99 @@
+<div class="background">
+	<!-- wrapper -->
+	<div class="page-content">
+    
+<div class="card mt-5 layout">
+  <div class="card-header p-0 mt-3 position-relative">
+  </div>
+
+  <div class="card-body pt-2">
+    <div class="align-items-center">
+      <div class="row justify-content-center">
+        <div class="col-sm-6 text-center">
+            <div type="button" class="card card-background move-on-hover home-button" data-bs-toggle="modal" data-bs-target="#exampleLargeModal">
+              <div class="card-body pt-12">
+                Create staff account
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-6 text-center">
+            <div class="card card-background move-on-hover home-button" type="button" routerLink="appointment-calendar">
+              <div class="card-body pt-12">
+                View appointment calendar
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-6 text-center">
+            <div class="card card-background move-on-hover home-button" type="button" routerLink="new-appointment">
+              <div class="card-body pt-12">
+                New appointment
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-6 text-center">
+            <div class="card card-background move-on-hover home-button" type="button" routerLink="points-calculator">
+              <div class="card-body pt-12">
+                Points Calculator
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleLargeModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Staff access form</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                <form [formGroup]="staffForm" class="row g-3">
+                  <div class="col-md-12">
+                    <label for="inputFirstName" class="form-label">First name</label>
+                    <input type="text" formControlName="firstName" class="form-control" id="inputFirstName">
+                    <div *ngIf="staffForm.controls['firstName'].hasError('required') && staffForm.controls['firstName'].touched "
+												class="error ms-2 pt-2">First name is required.</div>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="inputLastName" class="form-label">Last name</label>
+                    <input type="text" formControlName="lastName" class="form-control" id="inputLastName">
+                  </div>
+                  <div class="col-md-12">
+                    <label for="inputBirthday" class="form-label">Email address</label>
+                    <input type="email" formControlName="email" class="form-control" id="inputBirthday">
+                    <div *ngIf="staffForm.controls['email'].hasError('required') && staffForm.controls['email'].touched "
+												class="error ms-2 pt-2">Email is required.</div>
+                    <div *ngIf="staffForm.controls['email'].hasError('pattern') && !staffForm.controls['email'].valid "
+										class="error ms-2 pt-2">Invalid email.</div>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="inputType" class="form-label">Access area</label>
+                    <ng-multiselect-dropdown
+                      [settings]="dropdownSettings"
+                      [data]="dropdownList"
+                      formControlName="area" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [required]='requiredField'>
+                  </ng-multiselect-dropdown>
+                    <div *ngIf="!requiredField"
+												class="error ms-2 pt-2">Access area is required.</div>
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" (click)="save()" data-bs-dismiss="modal" class="btn btn-primary" [disabled]="!this.staffForm.valid || !requiredField">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,87 @@
+<div class="col">
+    <div class="">
+        <div class="card-body">
+            <!-- <div class="row">
+                <div class="col text-center mt-3">
+                    <h5 class="mb-1">Documents</h5>
+                </div>
+            </div> -->
+        </div>
+        <div *ngIf="isEmpty">
+            <h4>Empty requested documents</h4>
+            <hr>
+        </div>
+        <div class="table mt-4">
+            <form [formGroup]="documentForm">
+            <table *ngIf="!isEmpty" class="table align-middle mb-0 table-hover" id="Transaction-History">
+                <thead class="table-light">
+                    <tr>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Option</th>
+                    </tr>
+                </thead>
+           
+                <tbody>
+                    <tr *ngFor="let document of requestedDocuments; let i = index">
+                            <td>{{document.fileType}}
+                            </td>
+                            <td>
+                                <div *ngIf="!document.isSubmitted" class="d-flex align-items-center text-success">	<i class='bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1'></i>
+                                    <span>Submitted</span>
+                                </div>
+                                <div *ngIf="document.isSubmitted" class="d-flex align-items-center text-danger">	<i class='bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1'></i>
+                                    <span>Pending</span>
+                                </div>
+                            </td>
+                            <td >
+                                <div *ngIf="!document.isSubmitted">
+                                    <a class="btn button btn-download"  (click)="openFullscreen(content, document.fileUrl)">Download</a>
+                                </div>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+            </form> 
+        <div class="row justify-content-end mt-3 mb-3">
+            <div class="col text-end">
+                <button class="btn btn-outline-green" (click)="selectDocuments(template)" type="button">Add</button>  
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Modal title</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<ngx-imgPdf-viewer
+          [documentURL]="url"
+          [docPreviewConfig]="docPreviewConfig"
+        ></ngx-imgPdf-viewer>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+	</div>
+</ng-template>
+
+<ng-template #template>
+	<div class="modal-header">
+	  <h4 class="modal-title">Document request</h4>
+	  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	<div class="modal-body">
+	  <div class="row">
+		<app-document-select></app-document-select>
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-outline-danger" (click)="closeModels()">Cancel</button>
+	  <!-- <button type="button" class="btn btn-outline-green">Request</button> -->
+	</div>
+  </ng-template>

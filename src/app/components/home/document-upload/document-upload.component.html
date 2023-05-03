@@ -1,0 +1,64 @@
+<div class="container-fluid">
+    <div *ngIf="isEmpty">
+        No, requested files yet.
+    </div>
+    <div class="row" *ngIf="!isEmpty">
+        <div class="col-xl-12 d-flex">
+            <div class="card radius-10 w-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-1">Documents required from you (Click on the document to upload)</h5>
+                        </div>
+                    </div>
+                    <div class="table-responsive mt-4">
+                        <form [formGroup]="documentForm">
+                        <table class="table align-middle mb-0 table-hover" id="Transaction-History">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Due date</th>
+                                    <!-- <th>Select</th> -->
+                                    <th></th>
+                                    <th>Option</th>
+                                </tr>
+                            </thead>
+                       
+                            <tbody>
+    
+                                <tr *ngFor="let document of arrData; let i = index">
+    
+                                        <td>{{document.fileTypeDes}}</td>
+                                        <td>{{document.dueDate}}</td>
+                                        <td>
+                                            <div *ngIf="document.isUploaded" class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class='bx bxs-circle me-1'></i>Submitted</div>
+                                            <div *ngIf="!document.isUploaded">
+                                                <app-input-file-button
+                                                idInput={{document.fileType}}
+                                                (fileSelected)='getFile(document.fileType)'
+                                                (change)="onChange($event.target.files, document.fileType,document.fileTypeDes, document.studentId,document.lawyerId )">
+                                              </app-input-file-button>
+                                            </div>
+                                             
+                                        </td>
+                                        <td class="text-start" >
+                                            <i *ngIf="document.isUploaded" (click)="deleteFile(document)" class="bx bx-trash bx-sm btn-delete"></i>
+                                       </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </form> 
+                    <div class="row justify-content-end mt-3 mb-3">
+                        <div class="col-11 text-end btn-cancel">
+                            <button class="btn btn-outline-danger" (click)="cancel()" type="button">Cancel</button>  
+                        </div>
+                        <div class="col-1 text-end">
+                            <button class="btn btn-outline-green" (click)="save()" type="button">Save</button>  
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

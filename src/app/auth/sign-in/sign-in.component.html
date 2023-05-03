@@ -1,0 +1,72 @@
+<div class="bg-login">
+	<!--wrapper-->
+	<div class="wrapper">
+		<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+			<div class="container-fluid">
+				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+					<div class="col mx-auto">
+						<div class="card">
+							<div class="card-body">
+								<div class="border p-4 rounded">
+									<div class="text-center">
+										<h3 class="">Welcome</h3>
+									</div>
+									<div class="form-body">
+										<form [formGroup]="loginForm" class="row g-3">
+											<div class="col-12">
+												<label for="inputEmailAddress" class="form-label">User name</label>
+												<input type="email" formControlName="email" class="form-control" id="inputEmailAddress" placeholder="Email address">
+												<div *ngIf="loginForm.controls['email'].hasError('pattern') && !loginForm.controls['email'].valid "
+										class="error ms-2 pt-2">Invalid username.</div>
+										<div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched " class="error ms-2 pt-2">Username is required.</div>
+										</div>
+											<div class="col-12">
+												<label for="inputChoosePassword" class="form-label">Enter password</label>
+												<div class="input-group" id="show_hide_password">
+													<input [type]="password" formControlName="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password">
+													<button (click)="onShow()" class="input-group-text bg-transparent">
+														<i class="bx bx-hide" aria-hidden="true" *ngIf="!show"></i>
+														<i class="bx bx-show" aria-hidden="true" *ngIf="show"></i>
+													</button>
+											</div>
+											<div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched "
+												class="error ms-2 pt-2">Password is required.</div>
+												<div *ngIf="errorMessage && !loginForm.controls['email'].touched "
+												class="error ms-2 pt-2">Invalid username or password.</div>
+												</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<button type="button" class="btn btn-primary" (click)="signIn()" [disabled]="!loginForm.valid || isSubmit"><i class="bx bxs-lock-open"></i>Login</button>
+												</div>
+											</div>
+											
+											<div class="col-12 text-center"><a href="JavaScript:;" (click)="onForgotPassword()">Forgot Password ?</a>
+											</div>
+											<div class="text-center">
+												<p>Do not have an account? <a href="JavaScript:;" (click)="onSignup()">Sign up now</a>
+												</p>
+											</div>
+											<div class="text-center animate">Only for students</div>
+											<div class="d-grid social-container">
+												
+												<button (click)="loginWithGoogle()" class="btn my-4 shadow-sm btn-white"> <span class="d-flex justify-content-center align-items-center">
+													<img class="me-2" src="assets/images/icons/search.svg" width="16" alt="Image Description">
+													<span>Sign in with Google</span>
+													</span></button>
+												<button (click)="loginWithFacebook()" class="btn btn-facebook"><i class="bx bxl-facebook"></i>Sign in with Facebook</button>
+											</div>
+											
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!--end wrapper-->
+</div>
+<!-- <loading *ngIf="isLoading">{{ isLoading }}</loading> -->

@@ -1,0 +1,108 @@
+
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+	<div class="breadcrumb-title pe-3">Dashboard</div>
+	<div class="ps-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 p-0">
+				<li class="breadcrumb-item"><a href="#" (click)="$event.preventDefault()"><i class="bx bx-home-alt"></i></a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">Appointment Calender</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+<div class="card">
+	<div class="card-content">
+		<div class="card-body">
+			<div class="row d-flex flex-wrap justify-content-md-between mb-3 no-gutters">
+				<div class="col">
+					<div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+						<a class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+							Previous
+						</a>
+						<a class="btn btn-danger" mwlCalendarToday [(viewDate)]="viewDate">
+							Today
+						</a>
+						<a class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+							Next
+						</a>
+					</div>
+
+					<div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+						<a class="btn btn-primary btn-sm pb-0 bx bx-caret-left" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+							<i class="icon icon-arrows-left"></i>
+						</a>
+						<a class="btn btn-danger btn-sm pb-0 bx bx-caret-down" mwlCalendarToday [(viewDate)]="viewDate">
+							<i class="icon icon-arrows-sign-down"></i>
+						</a>
+						<a class="btn btn-primary btn-sm pb-0 bx bx-caret-right" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+							<i class="icon icon-arrows-right"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col text-end align-self-center align-items-center">
+					<h6 class="mb-0">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h6>
+				</div>
+			</div>
+			<div [ngSwitch]="view">
+				<mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+				 (dayClicked)="dayClicked($event.day)" (dayClicked)="openModal(template)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+				</mwl-calendar-month-view>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+	<h4 class="modal-title">Add time slots</h4>
+	<button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+  </div>
+  <div class="modal-body">
+	<div class="row">
+		<div  class="col-md-3">
+			<div class="row">	
+				<h6>{{clickedDay}}</h6>
+				<ul class="list-group list-group-flush radius-10">
+					
+					<li class="col list-group-item d-flex align-items-center radius-10 mb-2 shadow-sm" *ngFor="let timeSlot of timeSlots; let index = index">
+						<div class="flex-grow-1" [ngClass]="
+						timeSlot.isBooked ? 'booked' : 'btn-event-type'">
+							<h6>{{timeSlot.fromTime}} - {{timeSlot.toTime}}</h6>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div  class="col-md-9" >
+			<div class="row">
+				<div class="col-md-5"><h6>Start Time</h6></div>
+				<div class="col-md-5"><h6>End Time</h6></div>
+				<div class="col-md-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-5">
+					<ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="timeStart" [spinners] = "false"
+					id="timePickerStart" (ngModelChange)="onTimeStartChange($event)" [meridian]="meridianStart">
+				</ngb-timepicker>
+				</div>
+				<div class="col-md-5">
+					<ngb-timepicker  [(ngModel)]="timeEnd"
+					[meridian]="meridianEnd" id="timePickerEnd" [spinners] = "false" (ngModelChange)="onTimeEndChange($event)">
+				</ngb-timepicker>
+				</div>
+				<div class="col-md-2 align-self-center">
+					<button type="button" class="btn btn-primary" (click)="addTimeSlot()">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+  <div class="modal-footer">
+	<button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Close</button>
+  </div>
+</ng-template>

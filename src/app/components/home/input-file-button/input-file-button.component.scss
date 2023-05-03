@@ -1,0 +1,49 @@
+.wrapper{
+    display: inline-flex;
+    flex-direction: row; 
+    align-items: center;
+    // width: 300px;
+    // height: 100px;
+    margin: 10px;
+  }
+  
+  .container{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // height: 100px;
+    padding-bottom: 5px;
+    margin-left: 5px;
+  }
+  
+  i {
+    font-size: 30px;
+    color: #69C0Ca;
+    margin-bottom: 2px;
+  }
+  
+  #text{
+    font-size: 12px;
+    display: none;
+    margin-top: -20px
+  }
+  
+  .container:hover p#text{
+    display: block; 
+    //height: 20px;
+    //padding-top: 10px;
+  }
+  
+  .inputfile {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+  }
+  .inputfile + label {
+      font-size: 1.25em;
+      font-weight: 700;
+      cursor: pointer;
+  }

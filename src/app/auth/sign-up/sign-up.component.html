@@ -1,0 +1,217 @@
+<div class="bg-login">
+  <!--wrapper-->
+  <div class="wrapper">
+    <div class="d-flex align-items-center justify-content-center my-5 my-lg-0">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
+          <div class="col mx-auto">
+            <div class="my-5 py-1 text-center">
+            </div>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="border p-4 rounded">
+                  <div class="text-center">
+                    <h3 class="">Sign up</h3>
+                    <p>
+                      Already have an account?
+                      <a href="JavaScript:;" (click)="onSignIn()"
+                        >Sign in here</a
+                      >
+                    </p>
+                  </div>
+                  
+                  <div class="form-body">
+                    <form [formGroup]="signupForm" class="row g-3">
+                      <div class="col-sm-6" >
+                        <label for="inputFirstName" class="form-label"
+                          >First name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="firstName"
+                          id="inputFirstName"
+                          placeholder="Jhon"
+                        />
+                        <div
+                          *ngIf="
+                            signupForm.controls['firstName'].hasError(
+                              'required'
+                            ) && signupForm.controls['firstName'].touched
+                          "
+                          class="error ms-2 pt-2"
+                        >
+                          First name is required.
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="inputLastName" class="form-label"
+                          >Last name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="lastName"
+                          id="inputLastName"
+                          placeholder="Deo"
+                        />
+                      </div>
+                      <div class="col-12">
+                        <label for="inputEmailAddress" class="form-label"
+                          >Email address</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          formControlName="email"
+                          id="inputEmailAddress"
+                          placeholder="example@user.com"
+                        />
+                        <div
+                          *ngIf="
+                            signupForm.controls['email'].hasError('required') &&
+                            signupForm.controls['email'].touched
+                          "
+                          class="error ms-2 pt-2"
+                        >
+                          Email is required.
+                        </div>
+                      </div>
+                      
+                      <div class="col-12">
+                        <label for="inputDateOfBirth" class="form-label"
+                          >Date of birth</label
+                        >
+                        <input
+                          class="form-control"
+                          type="date"
+                          formControlName="dateOfBirth"
+                          [max]="maxDate"
+                          ngbDatepicker
+                        />
+                        <div
+                          *ngIf="
+                            signupForm.controls['dateOfBirth'].hasError(
+                              'required'
+                            ) && signupForm.controls['dateOfBirth'].touched
+                          "
+                          class="error ms-2 pt-2"
+                        >
+                          Date of birth is required.
+                        </div>
+                        <div *ngIf="
+                        signupForm.controls['dateOfBirth'].hasError(
+                          'maxDate'
+                        ) && signupForm.controls['dateOfBirth'].touched
+                      " class="error ms-2 pt-2">
+                          Please enter your probable date of birth.
+                        </div>
+                      </div>
+
+                      <div class="col-12">
+                        <label for="inputChoosePassword" class="form-label"
+                          >Password</label
+                        >
+                        <div class="input-group" id="show_hide_password">
+                          <input
+                            [type]="showPassword"
+                            class="form-control border-end-0"
+                            formControlName="password"
+                            id="inputChoosePassword"
+                            placeholder="Enter password"
+                          />
+                          <button
+                            (click)="onShowPassword()"
+                            class="input-group-text bg-transparent"
+                          >
+                            <i
+                              class="bx bx-hide"
+                              aria-hidden="true"
+                              *ngIf="!show"
+                            ></i>
+                            <i
+                              class="bx bx-show"
+                              aria-hidden="true"
+                              *ngIf="show"
+                            ></i>
+                          </button>
+                        </div>
+                        <div
+                          *ngIf="
+                            signupForm.controls['password'].hasError(
+                              'required'
+                            ) && signupForm.controls['password'].touched
+                          "
+                          class="error ms-2 pt-2"
+                        >
+                          Password is required.
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <label for="inputConfirmPassword" class="form-label"
+                          >Confirm password</label
+                        >
+                        <div class="input-group" id="show_hide_password">
+                          <input
+                            [type]="showConfirmPassword"
+                            class="form-control border-end-0"
+                            formControlName="confirmPassword"
+                            (keyup)="keyup($event.target.value)"
+                            id="inputConfirmPassword"
+                            placeholder="Enter password"
+                          />
+                          <button
+                            (click)="onShowConfirmPassword()"
+                            class="input-group-text bg-transparent"
+                          >
+                            <i
+                              class="bx bx-hide"
+                              aria-hidden="true"
+                              *ngIf="!showConfirm"
+                            ></i>
+                            <i
+                              class="bx bx-show"
+                              aria-hidden="true"
+                              *ngIf="showConfirm"
+                            ></i>
+                          </button>
+                        </div>
+                        <div
+                          *ngIf="
+                            signupForm.controls['confirmPassword'].hasError(
+                              'required'
+                            ) && signupForm.controls['confirmPassword'].touched
+                          "
+                          class="error ms-2 pt-2"
+                        >
+                          Confirm password is required.
+                        </div>
+                        <div *ngIf="!isMatching" class="error ms-2 pt-2">
+                          The passwords do not match.
+                        </div>
+                      </div>
+                      <div class="col-12 pt-4">
+                        <div class="d-grid">
+                          <button
+                            type="submit"
+                            [disabled]="!signupForm.valid || !isMatching"
+                            class="btn btn-primary"
+                            (click)="signUp()"
+                          >
+                            <i class="bx bx-user"></i>Sign up
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end row-->
+      </div>
+    </div>
+  </div>
+  <!--end wrapper-->
+</div>

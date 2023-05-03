@@ -1,0 +1,58 @@
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+	<div class="breadcrumb-title pe-3">Dashboard</div>
+	<div class="ps-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-0 p-0">
+				<li class="breadcrumb-item"><a href="#" (click)="$event.preventDefault()"><i class="bx bx-home-alt"></i></a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">New Appointments</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+<!--end breadcrumb-->
+<div class="align-items-center mb-2 mt-2 gap-3">
+    <div>Appointment Requests</div>
+</div>
+<!--end row-->
+<div class="row row-cols-1 row-cols-md-1">
+	<div class="col">
+		<div *ngIf="isEmpty">
+			<h4 class="text-center">No pending appointments.</h4>
+		</div>
+		<div class="card radius-10 shadow-none overflow-hidden">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table align-middle mb-0">
+						<thead class="table-light">
+							<tr>
+								<th>Date</th>
+								<th>Call Type</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let event of events">
+								<td>{{event.appointmentDate}}</td>
+								<td>{{event.callType}}</td>
+								<td>
+									<div class="d-flex align-items-center text-danger">	<i class='bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1'></i>
+										<span>Pending</span>
+									</div>
+								</td>
+								<td>
+									<div class="d-flex order-actions">	
+										<button class="btn btn-outline-danger" (click)="appointmentCancel(event.id)">Cancel</button> 
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end row-->

@@ -1,0 +1,140 @@
+<div class="row g-3 my-3">
+    <div class="col text-center"><strong>Session {{session?.attempt}}</strong></div>
+</div>
+<div *ngIf="questions">
+    <div class="row card-title g-3 mb-3 d-flex align-items-center">
+        <h5 class="mb-0 text-primary text-center">{{visaType}}</h5>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col"><strong><u>{{formType}}</u></strong></div>
+    </div>
+    <div class="card border-top border-0 border-4 border-primary">
+    <div class="card-body p-5">
+    <form class="row g-3">
+        <div >
+            <div *ngFor="let question of pointForm; let index = index" class="
+            mb-3">
+                <div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="text mb-2"><strong>{{index+1}}. {{question.name}}</strong></div>
+                        </div>
+                        <div *ngIf="question.point != null" class="col-2 text-end">
+                            <span class="point">{{question?.point}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <label class="py-1" *ngFor="let answer of question.answers; let i = index">
+                                    <input [(ngModel)]="question.selected"
+                                    [ngModelOptions]="{standalone: true}"
+                                      [name]="index" 
+                                      [id]="index + i" 
+                                      [value]="i"
+                                      type="radio" 
+                                      (change)="onChangeTypeTwo(index, i)"
+                                      [disabled]="true">
+                                      {{answer.name}}<br>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row py-3">
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="text-input" class="m-1">Instructions:</label><span *ngIf="question.instructions.length>1" (click)="viewEditedInstructions(content, question.instructions )" class="badge bg-edit">Edited</span><br>
+                                        <textarea class="instruction form-control" [(ngModel)]="question.comment"
+                                        [ngModelOptions]="{standalone: true}" name="myTextArea" placeholder="Enter instructions" rows="2"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="date-input" class="m-1">Alert:</label>
+                                    <input id="date-input" type="date" max="maxDate" class="form-control" [(ngModel)]="question.alert"
+                                    [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-5">
+                <hr>
+                <div class="col-md-10 text-total">
+                    Points total:
+                </div>
+                <div  class="col-md-2 text-end">
+                    <span class="point">{{total}}</span>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-md-12">
+                    <label for="text-input" class="py-2">Summary plan</label><br>
+                        <textarea class="summary" [(ngModel)]="summary" name="myTextArea" placeholder="Enter summary plan" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="row d-flex my-3">
+                <div class="align-buttons">
+                    <button class="btn btn-outline-primary me-2" (click)="requestDocuments(template)" type="button">Documents</button>
+                    <button class="btn btn-outline-green" (click)="update()" type="button">Update form</button>  
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>
+
+<ng-template #template>
+	<div class="modal-header">
+	  <h4 class="modal-title">Documents</h4>
+	  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	<div class="modal-body">
+	  <div class="row">
+        <app-selected-documents [session]="session"></app-selected-documents>
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-outline-danger" (click)="bsModalRef.hide()">Cancel</button>
+	</div>
+  </ng-template>
+
+  <ng-template #content>
+	<div class="modal-header">
+	  <h4 class="modal-title">Instruction History</h4>
+	  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+		<span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	<div class="modal-body body-size">
+	  <div class="row">
+                <table class="table mb-0 table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Instruction</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let instruction of instructions; let i = index">
+                            <td >{{i+1}}</td>
+                            <td >{{instruction.comment}}</td>
+                            <td >{{instruction.date}}</td>
+                            <td >{{instruction.time}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-outline-danger" (click)="bsModalRef.hide()">Cancel</button>
+	</div>
+  </ng-template>

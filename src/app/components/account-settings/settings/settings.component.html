@@ -1,0 +1,109 @@
+<div class="card">
+  <div class="row g-0">
+    <div class="col-md-2 p-5 border-end">
+      <div id="avatar-container">
+
+        <img id="avatar-photo" #avatarImg class="avatar-photo"
+          [src]="photo && photo !== '' ? photo : '/assets/images/gallery/user_avatar.png'" (mouseenter)="showAddPhotoOverlay=true"
+          alt="avatar photo">
+      
+        <div *ngIf="showAddPhotoOverlay" id="add-photo-overlay" class="avatar-photo"
+          (mouseleave)="showAddPhotoOverlay=false">
+      
+          <button id="add-avatar-photo-button" class="center-positon-absolute" mat-icon-button (click)="openFileInput(fileInput)">
+            <mat-icon>add_a_photo</mat-icon>
+          </button>
+      
+          <mat-icon id="remove-avatar-photo-button" *ngIf="photo && photo !== ''"  (click)="removePhoto()"
+            matTooltip="remove this photo">close</mat-icon>
+        </div>
+      
+        <!-- Input file -->
+        <input #fileInput type="file" (change)="addPhoto($event)" name="avatar" accept="image/png, image/jpeg"
+            style="display:none;">
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <dl class="row">
+          <dt class="col-sm-4">Name</dt>
+          <dd class="col-sm-8" [(ngModel)]="name" ngDefaultControl>{{user?.firstName}}</dd>
+
+          <dt class="col-sm-4">State</dt>
+          <dd class="col-sm-8" [(ngModel)]="state" ngDefaultControl>{{user?.state}}</dd>
+
+          <dt class="col-sm-4">Company name</dt>
+          <dd class="col-sm-8" [(ngModel)]="companyName" ngDefaultControl>{{user?.companyName}}</dd><br>
+
+          <div class="mt-3" *ngIf="!isStaff">
+            <label class="col">Consultation fee ($)</label>
+          </div>
+          
+          <dt class="col-sm-4" *ngIf="!isStaff">One hour</dt>
+          <dd class="col-sm-8" *ngIf="!isStaff" [(ngModel)]="oneHourFee" ngDefaultControl>{{user?.consultationFeeForOneHour}}</dd>
+
+          <dt class="col-sm-4" *ngIf="!isStaff">Half an hour</dt>
+          <dd class="col-sm-8" *ngIf="!isStaff" [(ngModel)]="halfHourFee" ngDefaultControl>{{user?.consultationFeeForHalfAndHour}}</dd>
+
+          <dt class="col-sm-4" *ngIf="!isStaff"><label>Charging for extra minutes</label></dt>
+          <dd class="col-sm-8" *ngIf="!isStaff"><input type="checkbox" class="checkbox-round" id="quantity" [(ngModel)]="isCharging" ngDefaultControl [checked]="isCharging" value="isCharging" [disabled]="true"/></dd>
+        </dl>
+        <hr>
+        <div class="row row-cols-auto row-cols-1 row-cols-md-3 align-items-center">
+        </div>
+        <div class="col">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+            data-bs-target="#exampleLargeModal">Update Details</button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleLargeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Update Profile and Consultation Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="editForm" *ngIf="editForm" class="row g-3">
+                    <div class="col-md-12">
+                      <label for="inputName" class="form-label">Name</label>
+                      <input type="text" class="form-control" formControlName="fName" id="inputName">
+                    </div>
+                    <div class="col-md-12">
+                      <label for="inputState" class="form-label">State</label>
+                      <input type="text" class="form-control" formControlName="fState" id="inputState">
+                    </div>
+                    <div class="col-md-12">
+                      <label for="inputType" class="form-label">Company name</label>
+                      <input type="text" class="form-control" formControlName="fCompanyName" id="inputCompanyName">
+                    </div>
+                    <div *ngIf="!isStaff">
+                      <label>Consultation fee ($)</label>
+                    </div>
+                    <div class="col-md-6" *ngIf="!isStaff">
+                      <label for="inputType" class="form-label">One hour</label>
+                      <input type="text" class="form-control" formControlName="fHourCharge" id="inputCompanyName">
+                    </div>
+                    <div class="col-md-6" *ngIf="!isStaff">
+                      <label for="inputType" class="form-label">Half hour</label>
+                      <input type="text" class="form-control" formControlName="fHalfHourCharge" id="inputCompanyName">
+                    </div>
+                    <div class="col-md-12" *ngIf="!isStaff">
+                      <input type="checkbox" class="checkbox-round me-3" id="quantity" formControlName="fIsCharging" [checked]="isCharging" value="isCharging" (change)="chargingChange($event)"/>
+                      <label for="inputType" class="form-label">Charging for extra minutes</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" (click)="saveEditedDetails()">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
